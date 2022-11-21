@@ -35,6 +35,7 @@ class SortSubmit extends StatelessWidget {
           child: Text("SORT"),
           onPressed: () {
             context.read<SortBloc>().add(SubmitInput());
+            AppNavigator.push(Routes.sortPage);
           },
         ));
   }

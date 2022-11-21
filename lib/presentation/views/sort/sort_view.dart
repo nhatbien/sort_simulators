@@ -34,11 +34,9 @@ class SortPage extends StatelessWidget {
         ? "Sắp xếp chọn"
         : sortType.state.sortSelected == SortType.INSERTION
             ? "Sắp xếp chèn"
-            : sortType.state.sortSelected == SortType.QUICK
-                ? "Sắp xếp nhanh"
-                : "Sắp xếp nổi bọt";
+            : "Sắp xếp nổi bọt";
     return Stack(children: [
-      const Positioned.fill(
+      Positioned.fill(
         //
         child: Image(
           image: AssetImage('assets/images/background.jpg'),
@@ -69,7 +67,7 @@ class SortPage extends StatelessWidget {
                               .textTheme
                               .headline5!
                               .copyWith(color: Colors.white)),
-                      const DropdownButtonExample(),
+                      DropdownButtonExample(),
                       /*  IconButton(
                         color: Colors.white,
                         iconSize: 40,
@@ -79,16 +77,6 @@ class SortPage extends StatelessWidget {
                     ],
                   )),
               //Cannot be const
-              Container(
-                width: 100,
-                color: Colors.white.withOpacity(0.7),
-                child: TextButton(
-                    onPressed: (() => {_showMyDialog(context)}),
-                    child: const Text(
-                      'Thống kê',
-                      style: TextStyle(color: Colors.black),
-                    )),
-              ),
               Expanded(
                 child: Container(
                   width: constraints.maxWidth,
@@ -120,99 +108,12 @@ class SortPage extends StatelessWidget {
               ),
               /*             SortSpeed<T>(),
      */
-              const SortButton()
+              SortButton()
             ],
           ),
         );
       }),
     ]);
     // return
-  }
-
-  Future<void> _showMyDialog(BuildContext context) async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Thống kê'),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Row(
-                  children: [
-                    const Text('Chọn:'),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Text(context
-                        .watch<SortBloc>()
-                        .state
-                        .swapLengthSelection
-                        .toString()),
-                  ],
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                Row(
-                  children: [
-                    const Text('Xen:'),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Text(context
-                        .watch<SortBloc>()
-                        .state
-                        .swapLengthInsertion
-                        .toString()),
-                  ],
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                Row(
-                  children: [
-                    const Text('Nổi bọt:'),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Text(context
-                        .watch<SortBloc>()
-                        .state
-                        .swapLengthBubble
-                        .toString()),
-                  ],
-                ),
-                const SizedBox(
-                  width: 20,
-                ),
-                Row(
-                  children: [
-                    const Text('Nhanh:'),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Text(context
-                        .watch<SortBloc>()
-                        .state
-                        .swapLengthQuick
-                        .toString()),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Approve'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
   }
 }
